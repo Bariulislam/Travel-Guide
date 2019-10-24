@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use('/login', login);
 app.use('/home', home);
 app.use('/user', user);
+//app.use('/user', profile);
 app.use('/logout', logout);
 
 
