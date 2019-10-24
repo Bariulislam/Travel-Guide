@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require('./../models/db.js');
+var userModel = require('./../models/user-model');
 var router = express.Router();
 
 router.get('/', function(request, response){
@@ -7,10 +7,14 @@ router.get('/', function(request, response){
 });
 
 router.post('/', function(request, response){
+	
+	var user = {
+		username: request.body.uname,
+		password: request.body.password
+	};
 
-	var sql ="select * from user where username='"+request.body.uname+"' and password='"+request.body.password+"'";
-	db.getResults(sql, function(results){
-		if(results.length > 0){
+	userModel.validate(user, function(status){
+		if(status){
 			response.cookie('username', request.body.uname);
 			response.redirect('/home');
 		}else{

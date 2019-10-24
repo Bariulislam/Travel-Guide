@@ -12,6 +12,7 @@
 		<tr>
 			<td>ID</td>
 			<td>USERNAME</td>
+			<td>Full Name</td>
 			<td>PASSWORD</td>
 			<td>ACTION</td>
 		</tr>
@@ -21,7 +22,9 @@
 		<tr>
 			<td><%= users[i].id %></td>
 			<td><%= users[i].username %></td>
+			<td><%= users[i].fullname %></td>
 			<td><%= users[i].password %></td>
+			
 			<td>
 				<a href="/user/edit/<%= users[i].id %>">Edit</a> | 
 				<a href="/user/delete/<%= users[i].id %>">Delete</a> | 
