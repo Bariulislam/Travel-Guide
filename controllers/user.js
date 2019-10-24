@@ -3,22 +3,6 @@ var userModel = require('./../models/user-model');
 
 var router = express.Router();
 
-
-router.get('*', function(request, response, next){
-
-	if(request.cookies['username'] != null){
-		next();
-	}else{
-		response.redirect('/logout');
-	}
-
-});
-
-router.get('/profile', function(request, response){
-	response.render("user/profile");
-	//console.log('abc');
-});
-
 router.get('/adduser', function(request, response){
 	response.render("user/adduser");
 });
@@ -44,6 +28,23 @@ router.post('/adduser', function(request, response){
 		}
 	});
 });
+
+
+router.get('*', function(request, response, next){
+
+	if(request.cookies['username'] != null){
+		next();
+	}else{
+		response.redirect('/logout');
+	}
+
+});
+
+router.get('/profile', function(request, response){
+	response.render("user/profile");
+	//console.log('abc');
+});
+
 
 router.get('/userList', function(request, response){
 		
