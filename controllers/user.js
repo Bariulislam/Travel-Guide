@@ -1,34 +1,6 @@
 var express = require('express');
 var userModel = require('./../models/user-model');
-
 var router = express.Router();
-
-router.get('/adduser', function(request, response){
-	response.render("user/adduser");
-});
-router.post('/adduser', function(request, response){
-	/* var id;
-	userModel.getAll(function(results){	
-		id: results.length
-	}); */	
-	
-	var user = {
-		username: request.body.username,
-		password: request.body.password, 
-		fullName: request.body.fullName,
-		
-	};
-	//console.log(id);
-
-	userModel.insert(user, function(status){
-		if(status){
-			response.redirect('/home');
-		}else{
-					
-		}
-	});
-});
-
 
 router.get('*', function(request, response, next){
 
@@ -40,72 +12,52 @@ router.get('*', function(request, response, next){
 
 });
 
-router.get('/profile', function(request, response){
-	response.render("user/profile");
-	//console.log('abc');
-});
-
-
-router.get('/userList', function(request, response){
-		
-		userModel.getAll(function(results){
-			response.render('user/index', {users: results});		
-		});	
-});
-
-router.get('/edit/:id', function(request, response){
-
-	userModel.getById(request.params.id, function(result){
-		response.render('user/edit', result);
+router.get('/details', function(request, response){
+	userModel.getAll(function(results){
+		if(results.length>0){
+			response.render('user/detial_index', {user: results});
+			//console.log(results);
+		}else{
+			response.send('invalid user format!');		
+		}
 	});
 	
+	//console.log("Details get");
+	//response.render('courses/view_course_index');
 });
 
-router.post('/edit/:id', function(request, response){
-
+router.get('/edituser/:user_id', function(request, response){
 	var user = {
-		username: request.body.username,
-		password: request.body.password,
-		id: request.params.id
+		name: request.params.user_id
 	};
-
-	userModel.update(user, function(status){
-		
-		if(status){
-			response.redirect('/user/userlist');
+	//console.log(user.name);
+	userModel.getByName(user, function(results){
+		if(results.length>0){
+			response.render('user/edit_index', {user: results});
+			//console.log(results);
 		}else{
-			response.redirect('/user/edit/'+request.params.id);
+			response.send('invalid edit format!');		
 		}
 	});
-	
 });
 
-router.get('/delete/:id', function(request, response){
-
-	userModel.getById(sql, function(result){
-		response.render("user/delete", {user: result[0]});
-	})
-});
-
-router.post('/delete/:id', function(request, response){
-
-	userModel.delete(sql, function(status){	
+router.post('/edituser/:user_id', function(request, response){
+	var user = {
+		firstName: request.body.txtfrist_name, 
+		lastName: request.body.txtlast_name,
+		username: request.body.txtuserid,
+		email: request.body.txtEmail,
+		address: request.body.txtaddress
+	};
+	//console.log(user.name);
+	//console.log(user)
+	userModel.update(user, function(status){
 		if(status){
-			response.redirect("/user/userList");
+			response.redirect('/home');
+			//console.log("Update Done");
 		}else{
-			response.redirect("/user/delete/"+request.params.id);	
+			response.send('invalid edit format!');		
 		}
-	})
+	});
 });
-
-router.get('/details/:id', function(request, response){
-
-	userModel.getById(request.params.id, function(result){
-		response.render("user/details", result);
-	})
-});
-
 module.exports = router;
-
-
-

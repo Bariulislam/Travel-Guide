@@ -5,9 +5,14 @@ var expSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var ejs = require('ejs');
 var login = require('./controllers/login');
+var registration = require('./controllers/registration');
 var home = require('./controllers/home');
 var user = require('./controllers/user');
 var logout = require('./controllers/logout');
+var homepage = require('./controllers/homepage');
+//var assign_courses = require('./controllers/assign_courses');
+////var student_view = require('./controllers/view_student');
+//var admin_notice = require('./controllers/admin_notice');
 var app = express();
 
 
@@ -18,23 +23,22 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expSession({secret:'my top secret value', saveUninitialized:true, resave: false}));
 app.use(cookieParser());
+app.use(express.static(__dirname+'/public'));
 app.use('/login', login);
+app.use('/registration', registration);
 app.use('/home', home);
-app.use('/user', user);
-//app.use('/user', profile);
+ app.use('/user', user);
 app.use('/logout', logout);
+app.use('/homepage', homepage);
+//app.use('/assigncourses', assign_courses);
+//app.use('/viewstudent', student_view);
+//app.use('/adminnotice', admin_notice);
+
 
 
 //ROUTER
 app.get('/', function(request, response){
 	response.send('index page!');
-});
-
-app.get('/test/your/:name/:id', function(request, response){
-	var id = request.params.id;
-	var name = request.params.name;
-	response.send(id+" "+name);
-
 });
 
 

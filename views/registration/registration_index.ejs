@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Login Form </title>
+	<title> Registration Form </title>
 	<style>
 		body{
 			background:url('Background.jpg');
@@ -11,12 +11,12 @@
 			padding:0;
 			font-family:Arial;
 		}
-		.login{
+		.registration{
 			margin:auto;
-			width:300px;
+			width:400px;
 			box-shadow:0px 8px 16px 0px rgba(0,0,0,0.9);
-			padding:80px 40px;
-			margin-top:200px;;
+			padding:70px 40px;
+			margin-top:50px;
 			background:linear-gradient(top, #3c3c3c 0%, #222222 100%);
 			background:-webkit-linear-gradient(top, #3c3c3c 0%, #222222 100%);
 		}
@@ -41,6 +41,20 @@
 			font-size:16px;
 			padding:10px;
 			text-align:center;
+		}
+		select{
+			width:100%;
+			margin-bottom:30px;
+			border:none;
+			outline:none;
+			border:2px #fff dotted;
+			background:transparent;
+			text-align: center;
+			border-radius:20px;
+			box-sizing:border-box;
+			color:#f00;
+			font-size:16px;
+			padding:10px;
 		}
 		::placeholder{
 			color:rgba(255,255,255,0.5);
@@ -74,16 +88,22 @@
 	</style>
 </head>
 	<body>
-	<div class="login">
-		<h2> LOGIN </h2>
+	<div class="registration">
+		<h2> REGISTRATION FORM </h2>
 			<form method="post">
-			<input type="text" name="username" placeholder="Enter User Name">
-			<input type="password" name="password" placeholder="Enter Password">
-			<input type="submit" name="btnLogin" value="Log In">
-			
+				<input type="text" name="txtFirstname" placeholder="First Name">
+				<input type="text" name="txtLastname" placeholder="Last Name">
+				<input type="text" name="txtusername" placeholder="Username">
+				<input type="text" name="job" value="customer" readonly>
+				<input type="password" name="txtPass" placeholder="Enter Password">
+				<input type="password" name="txtConfirmPass" placeholder="Confirm Password">
+				<input type="text" name="txtAddress" placeholder="Address">
+				<input type="text" name="txtEmail" placeholder="Email">
+				<input type="text" name="txtPhone" placeholder="phone number">
+				<input type="submit" name="btnRegister" value="Register Now">
+			</form>
 			<center>
-				<a href="/registration"> Don't have an account? Register Here!</a>
-			</center>
-	
+				<a href="/login"> Already have an account? Log In Here!</a>	
+			</center>			
 	</body>
 </html>
